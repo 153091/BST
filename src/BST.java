@@ -107,11 +107,11 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
     private Node min(Node x) {
         if (x.left == null) return x;
-        x = min(x.left);
-        return x;
+        return min(x.left);
+
     }
 
-
+    // возвращает максимальный ключ
     public Key max() {
         if (isEmpty()) throw new NoSuchElementException("calls max() with empty symbol table");
         Node x = max(root);
@@ -119,8 +119,8 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
     private Node max(Node x) {
         if ( x.right == null) return x;
-        x = max(x.right);
-        return x;
+        return max(x.right);
+
     }
 
     //largest kev <= given key
@@ -179,10 +179,21 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (cmp < 0) return rank(key, x.left); //продолжаем смотреть влево по уменьшению
         // ищем вправо +возвращаем количестов тех, что слева +1 за сам узел
         else if (cmp > 0) return rank(key, x.right) + 1 + size(x.left);
-        else  return size(x.left);
+        else  return size(x.left); // возвращаем то, что слева
     }
 
-    //public Key select(Key key){}
+    // Key of rank k [0...size-1]
+    public Key select(int k) {
+        if (k < 0 || k >= size()) throw new IllegalArgumentException("Illegal argument");
+        return select(k, root);
+    }
+    private Key select(int k, Node x) {
+        if (x == null) return null;
+        int leftSize = size(x.left);
+        if (leftSize > k) return select(k, x.left);
+        else if (leftSize < k) return select(k-(leftSize+1), x.right);
+        else           return x.key;
+    }
 
     // удалить наименьшее значение
     public void deleteMin() {
@@ -245,7 +256,11 @@ public class BST<Key extends Comparable<Key>, Value> {
 
         StdOut.println(bst.max());
         StdOut.println();
-        for (String s : bst.keys())
+        StdOut.print(bst.rank("A"));
+        StdOut.println();
+        StdOut.println(bst.select(7));
+        StdOut.println();
+        for (String s : bst.keys("A", "P"))
            StdOut.println(s + " " + bst.get(s));
     }
 
