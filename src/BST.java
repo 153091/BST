@@ -113,7 +113,7 @@ public class BST<Key extends Comparable<Key>, Value> {
 
 
     public Key max() {
-        if (isEmpty()) throw new NoSuchElementException("calls min() with empty symbol table");
+        if (isEmpty()) throw new NoSuchElementException("calls max() with empty symbol table");
         Node x = max(root);
         return x.key;
     }
@@ -238,14 +238,15 @@ public class BST<Key extends Comparable<Key>, Value> {
 
     public static void main(String[] args) {
         BST<String, Integer> bst = new BST<>();
-        for (int i = 0; StdIn.isEmpty(); i++) {
+        for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             bst.put(key, i);
         }
+
         StdOut.println(bst.max());
         StdOut.println();
         for (String s : bst.keys())
-            StdOut.println(s + " " + bst.get(s));
+           StdOut.println(s + " " + bst.get(s));
     }
 
 }
