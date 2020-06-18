@@ -1,3 +1,16 @@
+/** % java BST.java < input.txt
+ X
+ 0
+ R
+ A 8
+ C 4
+ E 12
+ H 5
+ L 11
+ M 9
+ P 10
+ */
+
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
@@ -254,11 +267,11 @@ public class BST<Key extends Comparable<Key>, Value> {
             bst.put(key, i);
         }
 
-        StdOut.println(bst.max());
+        StdOut.print(bst.max());
         StdOut.println();
         StdOut.print(bst.rank("A"));
         StdOut.println();
-        StdOut.println(bst.select(7));
+        StdOut.print(bst.select(7));
         StdOut.println();
         for (String s : bst.keys("A", "P"))
            StdOut.println(s + " " + bst.get(s));
