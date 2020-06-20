@@ -56,6 +56,11 @@ public class BST<Key extends Comparable<Key>, Value> {
 
     //put key-value pair into yhe table
     public void put(Key key, Value val) {
+        if (key == null) throw new IllegalArgumentException("calls put() with a null key");
+        if (val == null) {
+            delete(key);
+            return;
+        }
         root = put(root, key, val);
     }
     //рекурсия
