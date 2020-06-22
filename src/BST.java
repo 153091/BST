@@ -237,6 +237,16 @@ public class BST<Key extends Comparable<Key>, Value> {
         return x; // возвращаемся до корня
     }
 
+    // number ok keys in [lo..hi]
+    public int size(Key lo, Key hi) {
+        if (lo == null) throw new IllegalArgumentException("first argument to size() is null");
+        if (hi == null) throw new IllegalArgumentException("second argument to size() is null");
+
+        if (lo.compareTo(hi) > 0) return 0;
+        if (contains(hi)) return rank(hi) - rank(lo) + 1;
+        else              return rank(hi) - rank(lo);
+    }
+
     /**
      * Iterator*/
 
@@ -244,6 +254,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (isEmpty()) return new Queue<>();
         return keys(min(), max());
     }
+    // keys in [lo..hi] in sorted order
     public Iterable<Key> keys(Key lo, Key hi) {
         if (lo == null) throw new IllegalArgumentException("first argument to keys() is null");
         if (hi == null) throw new IllegalArgumentException("second argument to keys() is null");
